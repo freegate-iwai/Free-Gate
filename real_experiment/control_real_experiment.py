@@ -135,7 +135,7 @@ def optimize_weights_single_step(pi_u, x_si, x_axis, u_axis, n_x_bins1, n_x_bins
 
     # Solve
     prob = cp.Problem(cp.Minimize(L), constraints)
-    result = prob.solve(solver=cp.SCS, verbose=False, max_iters=1000)
+    result = prob.solve(solver=cp.SCS, verbose=False, max_iters=1000)#, warm_start=True)
 
     if np.any(w.value < 0) or np.any(w.value > 1):
         w.value = np.clip(w.value, 0, 1)
@@ -237,7 +237,7 @@ obs_caption = [r'$O_{0}$'.format(ii) for ii in range(obs_points.shape[1])]
 
 N = 1   # Number of robots
 # Instantiate Robotarium object
-r = robotarium.Robotarium(number_of_robots=N, show_figure=True, initial_conditions=np.array(np.mat('1.2; 0.6; 0')),
+r = robotarium.Robotarium(number_of_robots=N, show_figure=True, initial_conditions=np.array(np.mat('1.2; 0; 0')),
                           sim_in_real_time=True)
 
 
